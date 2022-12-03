@@ -25,12 +25,7 @@ class PermissionController extends Controller
             'name' => $request->name,
 
         ]);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Permission created successfully',
-            'permission' => $permission,
-
-        ]);
+        return response()->json('Permission created successfully');
     }
 
     public function edit($id)

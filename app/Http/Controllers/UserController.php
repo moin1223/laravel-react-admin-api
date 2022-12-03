@@ -17,8 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::query()->orderByDesc('id')->paginate(5);
-        return response()->json($users);
+        $users = User::all();
+        $paginateUsers = User::query()->orderByDesc('id')->paginate(5);
+        return response()->json([
+            "users"=>$users,
+            "paginateUsers"=>$paginateUsers     
+        ]);
+        // return response()->json($users);
     }
 
     /**
@@ -118,7 +123,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
+        // return response()->json(['message' => 'You are not adminzzzzzzzzz'], 403);
         $user = User::where('id', '=', 5)->first();
         if ($user->hasRole('admin')) {
             User::whereId($id)->first()->delete();
